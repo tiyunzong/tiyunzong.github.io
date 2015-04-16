@@ -17,7 +17,11 @@
   }
   window.addEventListener("popstate", function (event) {
   	var state = event.state;
-  	document.getElementById("frame").src = state.url;
+  	var frame = document.getElementById("frame");
+  	frame.contentWindow.postMessage({
+  	  type: "REPLACE_URL",
+  	  data: state.url,
+  	}, "https://tiyunzong.avosapps.com");
   });
   window.addEventListener("message", function (event) {
   	var message = event.data;
