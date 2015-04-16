@@ -1,0 +1,35 @@
+<!DOCTYPE>
+<html>
+<head>
+<title></title>
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; }
+  #frame { position: absolute; left: 0; top: 0; }
+</style>
+<script>
+(function () {
+  var frame = document.getElementById("frame");
+  function headEnd(data) {
+  	document.title = data.title;
+  	history.pushState(data, data.title, data.url);
+  }
+  window.addEventListener("message", function (event) {
+  	var state = event.state;
+  	frame.src = state.url;
+  });
+  window.addEventListener("message", function (event) {
+  	var message = event.data;
+  	switch (message.type) {
+  	  case "HEAD_END":
+  	  	headEnd(message.data);
+  	  	break;
+  	}
+  });
+})();
+</script>
+</head>
+<body>
+  <iframe id="frame" width="100%" height="100%" frameborder="0" src="https://tiyunzong.avosapps.com/"></iframe>
+</body>
+</html>
