@@ -12,7 +12,9 @@
   var frame = document.getElementById("frame");
   function headEnd(data) {
   	document.title = data.title;
-  	history.pushState(data, data.title, data.url);
+  	var url = data.url;
+  	url = url.replace(/^http(?:s)?:\/\/[^\/]+\/?/ig, '/');
+  	history.pushState(data, data.title, url);
   }
   window.addEventListener("popstate", function (event) {
   	var state = event.state;
