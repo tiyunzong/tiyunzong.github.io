@@ -11,11 +11,16 @@
 <body>
 <script>
 (function () {
+  var replacing = false;
   function headEnd(data) {
   	document.title = data.title;
   	var url = data.url;
   	url = url.replace(/^http(?:s)?:\/\/[^\/]+\/?/ig, '/');
-  	history.pushState(data, data.title, url);
+  	if (replacing) {
+  	  history.replaceState(data, data.title, url);
+  	} else {
+  	  history.pushState(data, data.title, url);
+  	}
   }
   function replaceUrl(url) {
     document.body.innerHTML = '<iframe id="frame" width="100%" height="100%" frameborder="0" src="' + url + '"></iframe>';
@@ -36,7 +41,9 @@
     }
   });
   window.addEventListener("load", function () {
+    replacing = true;
     replaceUrl("https://tiyunzong.avosapps.com/");
+    replacing = false;
   });
 })();
 </script>
