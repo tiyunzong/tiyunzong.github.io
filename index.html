@@ -17,18 +17,22 @@
   }
   window.addEventListener("popstate", function (event) {
   	var state = event.state;
-  	var frame = document.getElementById("frame");
-  	frame.contentWindow.postMessage({
-  	  type: "REPLACE_URL",
-  	  data: state.url,
-  	}, "https://tiyunzong.avosapps.com");
+  	if (state !== null) {
+    	var frame = document.getElementById("frame");
+    	frame.contentWindow.postMessage({
+    	  type: "REPLACE_URL",
+    	  data: state.url,
+    	}, "https://tiyunzong.avosapps.com");
+  	}
   });
   window.addEventListener("message", function (event) {
-  	var message = event.data;
-  	switch (message.type) {
-  	  case "HEAD_END":
-  	  	return headEnd(message.data);
-  	}
+    if (event.origin === "https://tiyunzong.avosapps.com") {
+    	var message = event.data;
+    	switch (message.type) {
+    	  case "HEAD_END":
+    	  	return headEnd(message.data);
+    	}
+    }
   });
 })();
 </script>
