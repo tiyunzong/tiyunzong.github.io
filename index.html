@@ -14,7 +14,7 @@
   	document.title = data.title;
   	history.pushState(data, data.title, data.url);
   }
-  window.addEventListener("message", function (event) {
+  window.addEventListener("popstate", function (event) {
   	var state = event.state;
   	frame.src = state.url;
   });
