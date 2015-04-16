@@ -9,7 +9,6 @@
 </style>
 <script>
 (function () {
-  var frame = document.getElementById("frame");
   function headEnd(data) {
   	document.title = data.title;
   	var url = data.url;
@@ -18,7 +17,7 @@
   }
   window.addEventListener("popstate", function (event) {
   	var state = event.state;
-  	frame.src = state.url;
+  	document.getElementById("frame").src = state.url;
   });
   window.addEventListener("message", function (event) {
   	var message = event.data;
