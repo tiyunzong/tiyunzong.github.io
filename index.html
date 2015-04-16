@@ -27,8 +27,7 @@
   	var message = event.data;
   	switch (message.type) {
   	  case "HEAD_END":
-  	  	headEnd(message.data);
-  	  	break;
+  	  	return headEnd(message.data);
   	}
   });
 })();
