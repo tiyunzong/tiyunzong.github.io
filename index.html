@@ -23,7 +23,9 @@
   	}
   }
   function replaceUrl(url) {
+    replacing = true;
     document.body.innerHTML = '<iframe id="frame" width="100%" height="100%" frameborder="0" src="' + url + '"></iframe>';
+    replacing = false;
   }
   window.addEventListener("popstate", function (event) {
   	var state = event.state;
@@ -41,9 +43,7 @@
     }
   });
   window.addEventListener("load", function () {
-    replacing = true;
     replaceUrl("https://tiyunzong.avosapps.com/");
-    replacing = false;
   });
 })();
 </script>
